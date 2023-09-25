@@ -1,77 +1,93 @@
-# Personal Portfolio 🔥
-> https://rajaprerak.github.io/
+<!-- PROJECT LOGO -->
+<br />
+<p align="center">
+  <h1 align="center">My Portfolio ✨</h1>
 
-:star: Star me on GitHub — it helps!
+  <p align="center">
+    <a href="https://xunxdd.github.io/portfolio">xunxdd.github.io</a>
+   modified from
+    <a href="https://hashirshoaeb.github.io">hashirshoaeb.github.io</a> (Thanks. Hashir)
 
-[![Maintenance](https://img.shields.io/badge/maintained-yes-green.svg)](https://github.com/rajaprerak/rajaprerak.github.io/commits/master)
-[![Website shields.io](https://img.shields.io/badge/website-up-yellow)](http://rajaprerak.github.io/)
-[![Ask Me Anything !](https://img.shields.io/badge/ask%20me-linkedin-1abc9c.svg)](https://www.linkedin.com/in/rajaprerak/)
-[![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
+  </p>
+</p>
+<!-- PROJECT LOGO -->
 
-### Website Preview
-#### Home Page
-<img src="website_images/HomePage.gif" width="900">
+## Table of Contents
 
+- [Technology Stack 🛠️](#technology-stack-)
+- [Structure ⚓](#structure-)
+- [Sharing 💗](#sharing-)
+- [Prerequisites 🍪](#prerequisites-)
+- [Setup And Deployment 🔧](#setup-and-deployment-)
 
-#### About Page
-<img src="website_images/AboutPage.png" width="900">
+## Technology Stack 🛠️
 
+Dependencies defined in package.json:
 
-#### Projects Page
-<img src="website_images/ProjectPage.png" width="900">
-  
-
-
-:star: Star me on GitHub — it helps!
-
-## Features 📋
-⚡️ Fully Responsive\
-⚡️ Valid HTML5 & CSS3\
-⚡️ Typing animation using `Typed.js`\
-⚡️ Easy to modify
-
-## Installation & Deployment 📦
-- Clone the repository and modify the content of <b>index.html</b> 
-- Add or remove images from `assets/img/` directory as per your requirement.
-- Update the info of `projects` folder according to your need
-- Use [Github Pages](https://create-react-app.dev/docs/deployment/#github-pages) to create your own website.
-- To deploy your website, first you need to create github repository with name `<your-github-username>.github.io` and push the generated code to the `master` branch.
-
-## Sections 📚
-✔️ About\
-✔️ Interests\
-✔️ Education\
-✔️ Online Certification\
-✔️ Experience\
-✔️ Projects \
-✔️ Skills \
-✔️ Resume\
-✔️ Contact Info
+[Reactjs](https://reactjs.org/)
+| [Bootstrap](https://getbootstrap.com/)
+| [Typist](https://github.com/jstejada/react-typist)
 
 
+## Sharing 💗
 
-## Tools Used 🛠️
-* <b>GitHub Pages</b> - To host my static website (HTML, CSS, JS).
+Project is open source. Feel free to make your own version. All you need to do is to fork this repository, edit [src/editable-stuff/config.js](./src/editable-stuff/config.js) and add resume. Mark star ⭐ if you like the project.
 
-## Contributing 💡
-#### Step 1
+## Prerequisites 🍪
 
-- **Option 1**
-    - 🍴 Fork this repo!
+You should have [Node.js](https://nodejs.org/en/) and [Git](https://git-scm.com/) installed on your PC. You should also own a GitHub account.
 
-- **Option 2**
-    - 👯 Clone this repo to your local machine.
+## Setup And Deployment 🔧
+
+1. To Get Started, Fork this repository to your GitHub account:
+2. Clone the forked repo from your account using:
+
+   ```bash
+     git clone https://github.com/<your-username>/home.git
+   ```
+
+3. Open in editor and edit [src/editable-stuff/config.js](./src/editable-stuff/config.js) file.
+
+4. Add your resume as <resume.pdf> in place of [src/editable-stuff/resume.pdf](./src/editable-stuff/)
+
+5. Edit [title](./public/index.html#L34) and meta [description](./public/index.html#L13) in [public/index.html](./public/index.html).
+6. Change URL in [package.json](./package.json) file:
+
+   ```json
+    "homepage": "https://<your-username>.github.io/home"
+   ```
+
+   Or for deployment at custom domain, refer [create-react-app.dev](https://create-react-app.dev/docs/deployment/#step-1-add-homepage-to-packagejson)
+
+7. After editing run the following bash commands:
+
+   ```bash
+   npm install
+   npm start
+   ```
+
+8. To deploy website, run:
+
+   ```bash
+    npm run build
+    npm run deploy
+   ```
+
+   Or for deployment at \<username>.github.io, refer [READMEdocs/custom-deployment.md](./READMEdocs/custom-deployment.md) and [pages.js](./pages.js)
+
+9. Congrats your site is up and running. To see it live, visit:
+
+   ```https
+     https://<your-username>.github.io/home
+   ```
+
+10. To change the thumbnail image:
+
+    - Navigate to the "public" folder.  
+    - There you will see "social-image.png".  
+    - Delete it.   
+    - Take a screenshot of your version and rename it "social-image.png" and place it there.  
+    
+   Next time if you make changes, repeat from step 8.
 
 
-#### Step 2
-
-- **Build your code** 🔨🔨🔨
-
-#### Step 3
-
-- 🔃 Create a new pull request.
-
-## License
-[![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
-
-- **[MIT license](http://opensource.org/licenses/mit-license.php)**
