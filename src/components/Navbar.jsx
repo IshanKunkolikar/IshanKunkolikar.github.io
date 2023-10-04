@@ -1,94 +1,102 @@
-import React, { useState } from "react";
-import { useScrollPosition } from "../hooks/useScrollPosition";
-import useResizeObserver from "../hooks/useResizeObserver";
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
-import {  about, career, education, portfolio, onlineWritings } from "../editable-stuff/config.js";
+import React, { useState } from 'react'
+import { Nav, Navbar } from 'react-bootstrap'
+import { motion } from 'framer-motion'
+import Avatar from '../assets/avatar.jpg'
 
-const Navigation = React.forwardRef((props, ref) => {
-  const [isTop, setIsTop] = useState(true);
-  const [scrollPosition, setScrollPosition] = useState(0);
-  const [active, setActive] = useState('home');
-  const navbarMenuRef = React.useRef();
-  const navbarDimensions = useResizeObserver(navbarMenuRef);
-  const navBottom = navbarDimensions ? navbarDimensions.bottom : 0;
-  useScrollPosition(
-    ({ prevPos, currPos }) => {
-      if (!navbarDimensions) return;
-      currPos.y + ref.current.offsetTop - navbarDimensions.bottom > 5
-        ? setIsTop(true)
-        : setIsTop(false);
-      setScrollPosition(currPos.y);
+import {ThemeProvider} from "styled-components";
+import { GlobalStyles } from "../css/GlobalStyles";
+import { lightTheme, darkTheme } from "../css/Themes"
+import { CgSun } from 'react-icons/cg';
+import { BiMoon } from 'react-icons/bi';
+
+export default function Navigation() {
+
+  const stored = localStorage.getItem("isDarkMode");
+  const [isDarkMode, setIsDarkMode] = useState(stored === "true" ? true : false);
+ 
+  const navItems = [
+    {
+      name: 'About',
+      href: '#about',
     },
-    [navBottom]
-  );
-
-  React.useEffect(() => {
-    if (!navbarDimensions) return;
-    navBottom - scrollPosition >= ref.current.offsetTop
-      ? setIsTop(false)
-      : setIsTop(true);
-
-      const sections = document.querySelectorAll(".target-section");
-      sections.forEach(function(current) {
-        const sectionHeight = current.offsetHeight;
-        const sectionTop = current.offsetTop - 50;
-        const sectionId = current.getAttribute("id");
-        const pos = navBottom - scrollPosition;
-       /* If our current scroll position enters the space where current section 
-        * on screen is, set active section
-        */
-        if (pos > sectionTop && pos <= sectionTop + sectionHeight) {
-          setActive(sectionId);
-        } 
-    });
-
-  }, [navBottom, navbarDimensions, ref, scrollPosition]);
+    {
+      name: 'Education',
+      href: '#education',
+    },
+    {
+      name: 'Experience',
+      href: '#experience',
+    },
+    {
+      name: 'Skills',
+      href: '#skills',
+    },
+    {
+      name: 'Projects',
+      href: '#projects',
+    },
+    {
+      name: 'Achievements',
+      href: '#achievements',
+    },
+    {
+      name: 'Contact',
+      href: '#contact',
+    },
+  ]
 
   return (
-    <Navbar
-      ref={navbarMenuRef}
-      className={` fixed-top  ${
-        !isTop ? "navbar-dark bg-dark" : "navbar-transparent"
-      }`}
-      expand="lg"
-    >
-      <Navbar.Brand className="brand" href={process.env.PUBLIC_URL + "/#home"}>
-        <img
-            src={process.env.PUBLIC_URL + '/favicon.svg'}
-            alt="profilepicture"
-            width="45"
-          />
-      </Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" className="toggler" />
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="mr-auto">
-          {about.show && <NavLink title ="About" active={active} anchor="aboutme"/>}
-          {career.show && <NavLink title ="Career" active={active} anchor="career"/> }
-          {education.show && <NavLink title ="Education" active={active} anchor="education"/>}
-          {portfolio.show && <NavLink title ="Portfolio" active={active} anchor="portfolio"/>}
-          {onlineWritings.show && <NavLink title ="Writings" active={active} anchor="publication"/>}
-          <Nav.Link
-            className="nav-link lead"
-            href={about.resume}
-            target="_blank"
-            rel="noreferrer noopener"
+    <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+      <GlobalStyles />
+      <Navbar
+        collapseOnSelect
+        variant='dark'
+        expand='lg'
+        className='fixed-top'
+        id='sideNav'
+      >
+        <Navbar.Brand onClick={() => (window.location = '/#about')}>
+          <div className='d-flex flex-row p-1'>
+            <span className='d-block d-lg-none ps-2'>Sagnik Ghosh</span>
+            <span className='d-block d-lg-none ps-3'>
+              <div className="SunMoon" onClick={() => setIsDarkMode(!isDarkMode)}>
+                <div>{isDarkMode === true ? <CgSun color='#ffc107' size='2rem' /> : <BiMoon color="#007BFF" size='2rem' />}</div>
+              </div>
+            </span>
+          </div>
+          <span className='d-none d-lg-block'>
+            <motion.img
+              className='img-fluid img-profile rounded-circle mx-auto mb-2'
+              src={Avatar}
+              alt='Sagnik Ghosh'
+              drag
+              dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }}
+              dragElastic={0.1}
+            />
+          </span>
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls='responsive-navbar-nav' />
+        <Navbar.Collapse id='responsive-navbar-nav'>
+          <Nav className='mr-auto'>
+            {navItems.map((navItem, index) => (
+              <Nav.Link href={navItem.href} key={index}>
+                {navItem.name}
+              </Nav.Link>
+            ))}
+          </Nav>
+        </Navbar.Collapse>
+        <span className='d-none d-lg-block pb-5'>
+          <div
+            className="SunMoon"
+            onClick={() => {
+              setIsDarkMode(!isDarkMode);
+              localStorage.setItem("isDarkMode", !isDarkMode);
+            }}
           >
-            Resume
-          </Nav.Link>
-
-        </Nav>
-      </Navbar.Collapse>
-    </Navbar>
-  );
-});
-
-const NavLink= ({active, title, anchor}) => (
-    <Nav.Link
-    className={`nav-link lead ${active===anchor ? "active" : ""}`}
-    href={`${process.env.PUBLIC_URL}/#${anchor}`}
-    >
-      {title}
-    </Nav.Link>
-)
-export default Navigation;
+            <div>{isDarkMode === true ? <CgSun color='#ffc107' size='2rem' /> : <BiMoon color="#007BFF" size='2rem' />}</div>
+          </div>
+        </span>
+      </Navbar>
+    </ThemeProvider>
+  )
+}

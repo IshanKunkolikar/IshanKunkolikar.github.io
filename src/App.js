@@ -1,94 +1,55 @@
-import React from "react";
-import { BrowserRouter, Route } from "react-router-dom";
-import {
-  navBar,
-  mainBody,
-  about,
-  getInTouch,
-  career,
-  onlineWritings,
-  portfolio,
-  education,
-} from "./editable-stuff/config.js";
-import MainBody from "./components/home/MainBody";
-import AboutMe from "./components/home/AboutMe";
-import Footer from "./components/Footer";
-import Navbar from "./components/Navbar";
-import Career from "./components/home/Career";
-import Education from "./components/home/Education";
-import GetInTouch from "./components/home/GetInTouch.jsx";
-import Portfolio from "./components/home/Portfolio";
-import Publication from './components/home/Publication';
+import React, { useEffect } from "react"
+import { Route, Switch } from "react-router-dom"
+import { Helmet } from "react-helmet"
+import AOS from "aos"
 
-const Home = React.forwardRef((props, ref) => {
-  return (
-    <>
-      <MainBody
-        gradient={mainBody.gradientColors}
-        title={`${mainBody.firstName} ${mainBody.middleName} ${mainBody.lastName}`}
-        message={mainBody.message}
-        icons={mainBody.icons}
-        ref={ref}
-      />
-      {about.show && (
-        <AboutMe
-          heading={about.heading}
-          messages={about.messages}
-          link={about.imageLink}
-          imgSize={about.imageSize}
-          resume={about.resume}
-        />
-      )}
-      {career.show && (
-        <Career
-          heading={career.heading}
-          careerList={career.lists}
-        />
-      )}
- 
-      {education.show && (
-        <Education
-          heading={education.heading}
-          educations={education.lists}
-        />
-      )}
-      {portfolio.show && (
-        <Portfolio
-          quote ={portfolio.quote}
-          note ={portfolio.note}
-          heading={portfolio.heading}
-          list={portfolio.list}
-        />
-      )}
-      {onlineWritings.show && (
-        <Publication
-          quote ={onlineWritings.quote}
-          heading={onlineWritings.heading}
-          list={onlineWritings.list}
-        />
-      )}
-    </>
-  );
-});
+import "bootstrap/dist/css/bootstrap.min.css"
+import "aos/dist/aos.css"
+import "./css/App.css"
 
-const App = () => {
-  const titleRef = React.useRef();
+import Navbar from "./components/Navbar"
+import Home from "./pages/Home"
+import Education from "./pages/Education"
+import Experience from "./pages/Experience"
+import Skills from "./pages/Skills"
+import Contact from "./pages/Contact"
+import Projects from "./pages/Projects"
+import Achievements from "./pages/Achievements"
+
+
+function App() {
+  useEffect(() => {
+    AOS.init()
+  }, [])
 
   return (
-    <BrowserRouter basename={process.env.PUBLIC_URL + "/"}>
-      {navBar.show && <Navbar ref={titleRef} />}
-      <Route path="/" exact component={() => <Home ref={titleRef} />} />
-      <Footer>
-        {getInTouch.show && (
-          <GetInTouch
-            heading={getInTouch.heading}
-            message={getInTouch.message}
-            email={getInTouch.email}
+    <Switch>
+      <Route exact path="/">
+        <Helmet>
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+          ></meta>
+          <meta
+            name="description"
+            content="Sagnik Ghosh - Fullstack Developer."
           />
-        )}
-      </Footer>
-    </BrowserRouter>
-  );
-};
+          <meta name="author" content="Sagnik Ghosh" />
+          <title>Sagnik Ghosh - Portfolio</title>
+        </Helmet>
+        <div id="wrapper">
+          <Navbar />
+          <Home />
+          <Education />
+          <Experience />
+          <Skills />
+          <Projects />
+          <Achievements />
+          <Contact />
+        </div>
+      </Route>
+    </Switch>
+  )
+}
 
-export default App;
+export default App
