@@ -46,8 +46,8 @@ export default function Home() {
       <div className='row justify-content-between'>
         <div className='col-md-6 order-last order-lg-first' data-aos='fade-up'>
           <h1 className="mb-0">
-            Sagnik
-            <span className="text-primary" style={{paddingLeft: '2vw'}}>Ghosh</span>
+            Ishan
+            <span className="text-primary" style={{paddingLeft: '2vw'}}>Kunkolikar</span>
           </h1>
           <div className="subheading mb-3">
             <span style={{paddingRight: '0.3vw'}}>
